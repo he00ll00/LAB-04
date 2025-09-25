@@ -1,4 +1,3 @@
-
 <?php
 
 require_once "../classes/book.php";
@@ -6,8 +5,14 @@ $bookObj = new Book();
 
 $book =[];
 $errors = [];
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "GET"){
+    if(isset($_GET["id"])){
+        $pid = trim(htmlspecialchars($_GET["id"]));
+        $book = $bookobj->fetchbook($pid);
+        if($book){
+            echo"<a href ='viewbook.php'>View Booka
+         
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
     $book["title"] = trim(htmlspecialchars($_POST["title"]));
     $book["author"] = trim(htmlspecialchars($_POST["author"]));
     $book["genre"] = trim(htmlspecialchars($_POST["genre"]));
@@ -18,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if(empty($book["title"])){
         $errors["title"] = "title is required!";
-    } elseif($bookObj->isBookExist($book["title"])){
+    } elseif($bookObj->isBookExist($book["name"],$_GET["id"])){
         $errors["title"] = "Book already exists";
 
     }
@@ -26,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $errors["author"] = "author is required!";
     }
     
-     if(empty($book["genre"])){
+     if(empty($book[le"])e"])){
         $errors["genre"] = "genre is required!";
     }
     
