@@ -2,6 +2,7 @@
 require_once "../classes/book.php";
 $bookObj = new Book();
 
+
 if($_SERVER["REQUEST_METHOD"] == "GET"){
 $search = isset($_GET["search"])? trim(htmlspecialchars($_GET["search"])) : "";
 $genre = isset($_GET["genre"])? trim(htmlspecialchars($_GET["genre"])) : "";
@@ -57,6 +58,7 @@ th {
             <th>Year</th>
             <th>Publisher</th>
             <th>Copies</th>
+             <th>Actions</th>
         </tr>
         <?php
         $no = 1;
@@ -69,9 +71,14 @@ th {
                     <td>".$book["publication_year"]."</td>
                     <td>".$book["publisher"]."</td>
                     <td>".$book["copies"]."</td>
+                    <td>
+                <a href='editbook.php?id=".$book["id"]."'>Edit</a> | 
+                <a href='deletebook.php?id=".$book["id"]."' onclick=\"return confirm('Are you sure you want to delete this book?')\">Delete</a>
+            </td>
                   </tr>";
         }
         ?>
     </table>
 </body>
 </html>
+
